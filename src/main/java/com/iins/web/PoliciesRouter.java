@@ -1,4 +1,4 @@
-package com.iins.rest;
+package com.iins.web;
 
 public class PoliciesRouter {
 }

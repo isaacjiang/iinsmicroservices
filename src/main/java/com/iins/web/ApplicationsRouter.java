@@ -1,4 +1,4 @@
-package com.iins.rest;
+package com.iins.web;
 
 import com.iins.applications.ApplicationModel;
 import org.json.JSONObject;
@@ -16,7 +16,7 @@ public class ApplicationsRouter {
     private static final String template = "Hello, %s!";
     private final AtomicLong counter = new AtomicLong();
 
-    @RequestMapping(value = "/application/get",method = RequestMethod.GET,produces = "application/json")
+    @RequestMapping(value = "/app/application/get",method = RequestMethod.GET,produces = "application/json")
     public String getId(@RequestParam(value="name", defaultValue="World") String name) {
         ApplicationModel am = new ApplicationModel(counter.incrementAndGet(), String.format(template, name));
         JSONObject result = new JSONObject();
