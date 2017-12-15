@@ -6,8 +6,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class UserService implements UserDetailsService {
 
@@ -16,14 +14,11 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-       List<UserModel> user = userRepository.findAll();
 
-        return user.get(0);
+        userRepository.save( new UserModel("1222","Lynn"));
+        userRepository.save( new UserModel("1223","Sophia"));
+        return userRepository.findOne(username);
     }
 
-    public List<UserModel> findAllUsers(){
-        userRepository.save( "12");
 
-        return userRepository.findAll();
-    }
 }

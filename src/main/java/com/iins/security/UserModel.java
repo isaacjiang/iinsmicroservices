@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
+
 public class UserModel implements UserDetails {
 
 	private String id;
@@ -128,6 +129,8 @@ public class UserModel implements UserDetails {
 	public void setPhone_number(String phone_number) {
 		this.phone_number = phone_number;
 	}
+
+
 	public JSONObject toJSON() {
 		JSONObject user = new JSONObject();
 		user.put("Id",getId());

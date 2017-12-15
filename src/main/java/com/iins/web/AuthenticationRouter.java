@@ -1,7 +1,8 @@
 package com.iins.web;
 
 import com.iins.security.UserModel;
-import com.iins.security.UserService;
+import com.iins.security.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -15,24 +16,27 @@ import java.util.List;
 @RestController
 public class AuthenticationRouter {
  
-   // @Autowired
-    UserService userService =new UserService();  //Service which will do all data retrieval/manipulation work
- 
-     
+    @Autowired
+    UserRepository userRepository; //=new UserService();  //Service which will do all data retrieval/manipulation work
+
+
     //-------------------Retrieve All Users--------------------------------------------------------
-     
+
     @RequestMapping(value = "/api/user/", method = RequestMethod.GET)
     public ResponseEntity<List<UserModel>> listAllUsers() {
-        List<UserModel> users = userService.findAllUsers();
+        System.out.println("Get in");
+         userRepository.save( new UserModel("1222","Lynn"));
+        userRepository.save( new UserModel("1223","Sophia"));
+        List<UserModel> users = userRepository.findAll();
         if(users.isEmpty()){
             return new ResponseEntity<List<UserModel>>(HttpStatus.NO_CONTENT);//You many decide to return HttpStatus.NOT_FOUND
         }
         return new ResponseEntity<List<UserModel>>(users, HttpStatus.OK);
     }
- 
- 
+
+
     //-------------------Retrieve Single UserModel--------------------------------------------------------
-     
+
     @RequestMapping(value = "/api/user/{id}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
     public ResponseEntity<UserModel> getUser(@PathVariable("id") String id) {
         System.out.println("Fetching UserModel with id " + id);
@@ -43,7 +47,7 @@ public class AuthenticationRouter {
         }
         return new ResponseEntity<UserModel>(user, HttpStatus.OK);
     }
- 
+
      
 //
 //    //-------------------Create a UserModel--------------------------------------------------------
